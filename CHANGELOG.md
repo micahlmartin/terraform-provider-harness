@@ -1,5 +1,14 @@
 # 0.1.13 (Unreleased)
 
+ENHANCEMENTS:
+
+* Some big changes here are happening. ([#1](https://github.com/hashicorp/terraform-provider-aws/issues/1))
+* resource/aws_lb: Update `name` and `name_prefix` plan-time validation to exclude `"internal-"` ([#80](https://github.com/hashicorp/terraform-provider-aws/issues/80))
+
+BUG FIXES:
+
+* Fixes some bugs and other things. ([#79](https://github.com/hashicorp/terraform-provider-aws/issues/79))
+
 # 0.1.12
 
 BUG FIXES:
