@@ -2,7 +2,7 @@
 
 BUG FIXES:
 
-* Fixes some bugs. ([#74](https://github.com/hashicorp/terraform-provider-aws/issues/74))
+* Fixes some bugs and other things. ([#79](https://github.com/hashicorp/terraform-provider-aws/issues/79))
 
 # 0.1.12
 
