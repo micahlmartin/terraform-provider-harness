@@ -39,6 +39,8 @@ pipeline:
 
                                         ./scripts/generate-changelog.sh
 
+                                        cat .git/config
+
                                         if [[ `git status --porcelain` ]]; then
                                             #if ${{github.event_name == 'workflow_dispatch'}}; then
                                             #    MSG="Update CHANGELOG.md (Manual Trigger)"
