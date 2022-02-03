@@ -1,9 +1,5 @@
 # 0.1.13 (Unreleased)
 
-BUG FIXES:
-
-* Fixes some bugs and other things. ([#79](https://github.com/hashicorp/terraform-provider-aws/issues/79))
-
 # 0.1.12
 
 BUG FIXES:
