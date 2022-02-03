@@ -51,6 +51,7 @@ pipeline:
                                             git commit -m "$MSG" 
                                             git push
                                         fi
+                                    shell: Bash
     variables:
         - name: GITHUB_TOKEN
           type: Secret
