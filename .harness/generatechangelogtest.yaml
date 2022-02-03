@@ -5,11 +5,6 @@ pipeline:
     projectIdentifier: tf_provider
     orgIdentifier: Micahs_Projects
     tags: {}
-    properties:
-        ci:
-            codebase:
-                connectorRef: micahlmartinterraformproviderharness
-                build: <+input>
     stages:
         - stage:
               name: generate-changelog
