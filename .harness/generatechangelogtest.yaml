@@ -49,7 +49,7 @@ pipeline:
                                             #if ${{github.event_name == 'workflow_dispatch'}}; then
                                             #    MSG="Update CHANGELOG.md (Manual Trigger)"
                                             #else
-                                                MSG="Update CHANGELOG.md for #${{ github.event.pull_request.number }}"
+                                                MSG="Update CHANGELOG.md for #<+trigger.payload.pull_request.number>"
                                             #fi
                                             git config --local user.email changelogbot@harness.io
                                             git config --local user.name changelogbot
@@ -57,3 +57,4 @@ pipeline:
                                             git commit -m "$MSG" 
                                             git push
                                         fi
+              variables: []
