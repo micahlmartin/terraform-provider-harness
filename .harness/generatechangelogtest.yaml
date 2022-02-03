@@ -26,7 +26,11 @@ pipeline:
                                 spec:
                                     connectorRef: org.gcp
                                     image: us.gcr.io/sales-209522/micah/go-build-tools:1.16-stretch-8
-                                    command: git clone https://${GITHUB_TOKEN}@github.com/micahlmartin/terraform-provider-harness.git .
+                                    command: |-
+                                        set -x
+
+                                        git clone https://${GITHUB_TOKEN}@github.com/micahlmartin/terraform-provider-harness.git .
+                                    shell: Bash
                           - step:
                                 type: Run
                                 name: generate changelog
