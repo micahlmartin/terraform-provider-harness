@@ -2,11 +2,13 @@
 
 ENHANCEMENTS:
 
+* Made a bunch of interesting changes you should look at ([#2](https://github.com/hashicorp/terraform-provider-aws/issues/2))
 * Some big changes here are happening. ([#1](https://github.com/hashicorp/terraform-provider-aws/issues/1))
 * resource/aws_lb: Update `name` and `name_prefix` plan-time validation to exclude `"internal-"` ([#80](https://github.com/hashicorp/terraform-provider-aws/issues/80))
 
 BUG FIXES:
 
+* Fixed missing nextgen auth configuration in the provider. ([#76](https://github.com/hashicorp/terraform-provider-aws/issues/76))
 * Fixes some bugs and other things. ([#79](https://github.com/hashicorp/terraform-provider-aws/issues/79))
 
 # 0.1.12
