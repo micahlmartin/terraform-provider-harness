@@ -1,8 +1,14 @@
+# 0.1.13 (Unreleased)
+
+BUG FIXES:
+
+* Fixes some bugs. ([#74](https://github.com/hashicorp/terraform-provider-aws/issues/74))
+
 # 0.1.12
 
 BUG FIXES:
 
-* Fixed missing credentials in provider setup.
+* Fixes some bugs. ([#74](https://github.com/hashicorp/terraform-provider-aws/issues/74))
 
 # 0.1.11
 

@@ -1,3 +1,0 @@
-```release-note:bug
-Fixes some bugs.
-```
