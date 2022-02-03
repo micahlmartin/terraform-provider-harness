@@ -46,7 +46,7 @@ pipeline:
                                         cat .git/config
 
                                         if [[ `git status --porcelain` ]]; then
-                                            if [[ "<+trigger.payload.pull_request.number>" == "nukll" ]]; then
+                                            if [[ "<+trigger.payload.pull_request.number>" == "null" ]]; then
                                                MSG="Update CHANGELOG.md (Manual Trigger)"
                                             else
                                                 MSG="Update CHANGELOG.md for #<+trigger.payload.pull_request.number>"
