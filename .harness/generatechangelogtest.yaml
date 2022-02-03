@@ -16,7 +16,7 @@ pipeline:
               identifier: generatechangelog
               type: CI
               spec:
-                  cloneCodebase: true
+                  cloneCodebase: false
                   infrastructure:
                       type: KubernetesDirect
                       spec:
@@ -26,13 +26,12 @@ pipeline:
                       steps:
                           - step:
                                 type: Run
-                                name: git fetch
+                                name: git clone
                                 identifier: gitfetch
                                 spec:
                                     connectorRef: org.gcp
                                     image: us.gcr.io/sales-209522/micah/go-build-tools:1.16-stretch-8
-                                    command: |
-                                        git fetch --unshallow
+                                    command: git clone https://${GITHUB_TOKEN}@github.com/harness-io/terraform-provider-harness.git .
                                 when:
                                     stageStatus: Success
                                     condition: "false"
@@ -61,4 +60,7 @@ pipeline:
                                             git commit -m "$MSG" 
                                             git push
                                         fi
-              variables: []
+    variables:
+        - name: GITHUB_TOKEN
+          type: Secret
+          value: org.githubciautomationtoken
