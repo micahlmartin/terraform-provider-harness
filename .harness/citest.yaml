@@ -30,7 +30,7 @@ pipeline:
                                 identifier: fetch_go_version
                                 spec:
                                     connectorRef: account.harnessImage
-                                    image: unbuntu:latest
+                                    image: ubuntu:latest
                                     command: |-
                                         export GO_VERSION=$(cat .go-version)
                                         echo "Setting go version: ${GO_VERSION}"
