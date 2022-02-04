@@ -36,8 +36,17 @@ pipeline:
                                         go env | sort
                                         echo "----->"
                                         env | sort
+                  sharedPaths:
+                      - <+pipeline.variables.GOCACHE>
+                      - <+pipeline.variables.GOMODCACHE>
     variables:
         - name: GO_VERSION
           type: String
           default: 1.17.6
           value: <+input>
+        - name: GOCACHE
+          type: String
+          value: /root/.cache/go-build
+        - name: GOMODCACHE
+          type: String
+          value: /go/pkg/mod
