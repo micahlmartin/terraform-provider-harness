@@ -33,7 +33,9 @@ pipeline:
                                     image: golang:<+pipeline.variables.GO_VERSION>
                                     command: |-
                                         # go mod download
-                                        go env 
+                                        go env | sort
+                                        echo "----->"
+                                        env | sort
     variables:
         - name: GO_VERSION
           type: String
