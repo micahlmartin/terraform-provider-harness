@@ -25,6 +25,15 @@ pipeline:
                   execution:
                       steps:
                           - step:
+                                type: RestoreCacheGCS
+                                name: restore cache
+                                identifier: restore_cache
+                                spec:
+                                    connectorRef: org.gcp
+                                    bucket: harness-micah-test
+                                    key: go-pkg-mod-{{ checksum "go.mod" }}
+                                    archiveFormat: Tar
+                          - step:
                                 type: Run
                                 name: go mod download
                                 identifier: go_mod_download
@@ -32,16 +41,26 @@ pipeline:
                                     connectorRef: account.harnessImage
                                     image: golang:<+pipeline.variables.GO_VERSION>
                                     command: |
-                                        # go mod download
-                                        #go env | sort
-                                        #echo "----->"
-                                        #env | sort
+                                        ls -la $(go env GOCACHE)
+                                        echo "----->"
+                                        ls -la $(go env GOMODCACHE)
 
                                         go mod download
 
                                         ls -la $(go env GOCACHE)
                                         echo "----->"
                                         ls -la $(go env GOMODCACHE)
+                          - step:
+                                type: SaveCacheGCS
+                                name: save cache
+                                identifier: save_cache
+                                spec:
+                                    connectorRef: org.gcp
+                                    bucket: harness-micah-test
+                                    key: go-pkg-mod-{{ checksum "go.mod" }}
+                                    sourcePaths:
+                                        - <+pipeline.variables.GOMODCACHE>
+                                    archiveFormat: Tar
                           - step:
                                 type: Run
                                 name: test
