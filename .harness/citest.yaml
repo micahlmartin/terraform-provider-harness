@@ -8,8 +8,7 @@ pipeline:
     properties:
         ci:
             codebase:
-                connectorRef: org.harnessiogithub
-                repoName: terraform-provider-harness
+                connectorRef: micahlmartinterraformproviderharness
                 build: <+input>
     stages:
         - stage:
