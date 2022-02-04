@@ -36,3 +36,13 @@ pipeline:
                                         echo "Setting go version: ${GO_VERSION}"
                                     outputVariables:
                                         - name: GO_VERSION
+                          - step:
+                                type: Run
+                                name: go mod download
+                                identifier: go_mod_download
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: golang:<+execution.steps.fetch_go_version.output.outputVariables.GO_VERSION>
+                                    command: |-
+                                        # go mod download
+                                        go env
