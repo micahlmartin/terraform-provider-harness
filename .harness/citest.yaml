@@ -31,11 +31,28 @@ pipeline:
                                 spec:
                                     connectorRef: account.harnessImage
                                     image: golang:<+pipeline.variables.GO_VERSION>
-                                    command: |-
+                                    command: |
                                         # go mod download
-                                        go env | sort
+                                        #go env | sort
+                                        #echo "----->"
+                                        #env | sort
+
+                                        go mod download
+
+                                        ls -la $(go env GOCACHE)
                                         echo "----->"
-                                        env | sort
+                                        ls -la $(go env GOMODCACHE)
+                          - step:
+                                type: Run
+                                name: test
+                                identifier: test
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: golang:<+pipeline.variables.GO_VERSION>
+                                    command: |-
+                                        ls -la $(go env GOCACHE)
+                                        echo "---->"
+                                        ls -la $(go env GOMODCACHE)
                   sharedPaths:
                       - <+pipeline.variables.GOCACHE>
                       - <+pipeline.variables.GOMODCACHE>
