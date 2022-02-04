@@ -1,0 +1,39 @@
+pipeline:
+    name: ci-test
+    identifier: citest
+    allowStageExecutions: false
+    projectIdentifier: tf_provider
+    orgIdentifier: Micahs_Projects
+    tags: {}
+    properties:
+        ci:
+            codebase:
+                connectorRef: org.harnessiogithub
+                repoName: terraform-provider-harness
+                build: <+input>
+    stages:
+        - stage:
+              name: build
+              identifier: build
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: account.micahsprojects
+                          namespace: micahs-projects
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: fetch go version
+                                identifier: fetch_go_version
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: unbuntu:latest
+                                    command: |-
+                                        export GO_VERSION=$(cat .go-version)
+                                        echo "Setting go version: ${GO_VERSION}"
+                                    outputVariables:
+                                        - name: GO_VERSION
