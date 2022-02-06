@@ -93,17 +93,6 @@ pipeline:
                                     sourcePaths:
                                         - <+pipeline.variables.GOCACHE>
                                     archiveFormat: Tar
-                          - step:
-                                type: Run
-                                name: test
-                                identifier: test
-                                spec:
-                                    connectorRef: account.harnessImage
-                                    image: golang:<+pipeline.variables.GO_VERSION>
-                                    command: |-
-                                        ls -la $(go env GOCACHE)
-                                        echo "---->"
-                                        ls -la $(go env GOMODCACHE)
                   sharedPaths:
                       - <+pipeline.variables.GOCACHE>
                       - <+pipeline.variables.GOMODCACHE>
