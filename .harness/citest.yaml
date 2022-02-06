@@ -62,7 +62,7 @@ pipeline:
                                 spec:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
-                                    key: terraform-provider-harness-{{ checksum "internal/**" }}
+                                    key: build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
                                     archiveFormat: Gzip
                                     resources:
                                         limits:
@@ -107,7 +107,6 @@ pipeline:
                   sharedPaths:
                       - <+pipeline.variables.GOCACHE>
                       - <+pipeline.variables.GOMODCACHE>
-              variables: []
     variables:
         - name: GO_VERSION
           type: String
