@@ -26,7 +26,7 @@ pipeline:
                       steps:
                           - step:
                                 type: RestoreCacheGCS
-                                name: restore cache
+                                name: restore go cache
                                 identifier: restore_cache
                                 spec:
                                     connectorRef: org.gcp
@@ -41,18 +41,18 @@ pipeline:
                                     connectorRef: account.harnessImage
                                     image: golang:<+pipeline.variables.GO_VERSION>
                                     command: |
-                                        ls -la $(go env GOCACHE)
-                                        echo "----->"
-                                        ls -la $(go env GOMODCACHE)
-
                                         go mod download
-
-                                        ls -la $(go env GOCACHE)
-                                        echo "----->"
-                                        ls -la $(go env GOMODCACHE)
+                          - step:
+                                type: Run
+                                name: go build
+                                identifier: go_build
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: golang:<+pipeline.variables.GO_VERSION>
+                                    command: go build
                           - step:
                                 type: SaveCacheGCS
-                                name: save cache
+                                name: save go cache
                                 identifier: save_cache
                                 spec:
                                     connectorRef: org.gcp
@@ -60,6 +60,7 @@ pipeline:
                                     key: go-pkg-mod-{{ checksum "go.mod" }}
                                     sourcePaths:
                                         - <+pipeline.variables.GOMODCACHE>
+                                        - <+pipeline.variables.GOCACHE>
                                     archiveFormat: Tar
                           - step:
                                 type: Run
