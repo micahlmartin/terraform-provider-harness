@@ -43,6 +43,30 @@ pipeline:
                                     command: |
                                         go mod download
                           - step:
+                                type: SaveCacheGCS
+                                name: save cache
+                                identifier: save_cache
+                                spec:
+                                    connectorRef: org.gcp
+                                    bucket: harness-micah-test
+                                    key: go-pkg-mod-{{ checksum "go.mod" }}
+                                    sourcePaths:
+                                        - <+pipeline.variables.GOMODCACHE>
+                                    archiveFormat: Tar
+                          - step:
+                                type: RestoreCacheGCS
+                                spec:
+                                    connectorRef: org.gcp
+                                    bucket: harness-micah-test
+                                    key: terraform-provider-harness-{{ checksum "internal/**" }}
+                                    archiveFormat: Gzip
+                                    resources:
+                                        limits:
+                                            memory: 1Gi
+                                            cpu: "1"
+                                name: restore build cache
+                                identifier: restore_build_cache
+                          - step:
                                 type: Run
                                 name: go build
                                 identifier: go_build
@@ -52,14 +76,13 @@ pipeline:
                                     command: go build
                           - step:
                                 type: SaveCacheGCS
-                                name: save go cache
-                                identifier: save_cache
+                                name: save cache
+                                identifier: save_build_cache
                                 spec:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
-                                    key: go-pkg-mod-{{ checksum "go.mod" }}
+                                    key: build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
                                     sourcePaths:
-                                        - <+pipeline.variables.GOMODCACHE>
                                         - <+pipeline.variables.GOCACHE>
                                     archiveFormat: Tar
                           - step:
