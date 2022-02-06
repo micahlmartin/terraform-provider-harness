@@ -115,7 +115,7 @@ pipeline:
           value: <+input>
         - name: GOCACHE
           type: String
-          value: /root/.cache/go-build
+          value: /go/.cache/go-build
         - name: GOMODCACHE
           type: String
           value: /go/pkg/mod
