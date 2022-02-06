@@ -63,7 +63,7 @@ pipeline:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
                                     key: harness-terraform-provider-build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
-                                    archiveFormat: Gzip
+                                    archiveFormat: Tar
                                     resources:
                                         limits:
                                             memory: 1Gi
