@@ -31,7 +31,7 @@ pipeline:
                                 spec:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
-                                    key: go-mod-cahe-{{ checksum "go.mod" }}
+                                    key: harness-terraform-provider-go-mod-cache-{{ checksum "go.mod" }}
                                     archiveFormat: Tar
                           - step:
                                 type: Run
@@ -53,7 +53,7 @@ pipeline:
                                 spec:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
-                                    key: go-mod-cache-{{ checksum "go.mod" }}
+                                    key: harness-terraform-provider-go-mod-cache-{{ checksum "go.mod" }}
                                     sourcePaths:
                                         - <+pipeline.variables.GOMODCACHE>
                                     archiveFormat: Tar
@@ -62,7 +62,7 @@ pipeline:
                                 spec:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
-                                    key: build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
+                                    key: harness-terraform-provider-build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
                                     archiveFormat: Gzip
                                     resources:
                                         limits:
@@ -89,7 +89,7 @@ pipeline:
                                 spec:
                                     connectorRef: org.gcp
                                     bucket: harness-micah-test
-                                    key: build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
+                                    key: harness-terraform-provider-build-cache-{{ checksum "go.mod" }}-{{ checksum "internal/**" }}
                                     sourcePaths:
                                         - <+pipeline.variables.GOCACHE>
                                     archiveFormat: Tar
